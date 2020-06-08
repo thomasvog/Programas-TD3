@@ -89,3 +89,8 @@ int arre[5];
     pthread_exit(NULL);
 
 }
+
+// El objetivo de este programa es igual al de mutex01, esto es, sumar 500000
+// en la variable global "total".
+
+// La diferencia es que en este caso se utiliza mutex dinamico en vez de estatico.

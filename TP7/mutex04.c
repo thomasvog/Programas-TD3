@@ -69,14 +69,14 @@ int local1 , j, numero;
 
 	numero= *(int*)nro;
 	
-	s=pthread_mutex_lock(&mtx1);         //bloqueo del mutex
+	s=pthread_mutex_lock(&mtx);         //bloqueo del mutex
 	if (s!=0){
 		printf("ERROR; pthread_mutex() = %d\n", s);
 	exit(-1);   }
 	
 	printf("Hilo= %d bloquea mutex1\n", numero);
 	
-	s=pthread_mutex_lock(&mtx);         //bloqueo del mutex
+	s=pthread_mutex_lock(&mtx1);         //bloqueo del mutex
 	if (s!=0){
 		printf("ERROR; pthread_mutex() = %d\n", s);
 	exit(-1);   }
@@ -149,3 +149,13 @@ int arre[5];
 
 }
 
+// El objetivo del programa es sumar en cada variable global (total y total1) hasta
+// obtener como resultado 2 millones en cada una.
+
+// El problema está en que cada hilo comienza bloqueando un mutex diferente, por lo que
+// al querer bloquear el segundo mutex en ambos casos, ya se encuentra bloqueado
+// por el otro hilo y ambos hilos quedan bloqueados en espera de que se desbloquee
+// alguno de los mutex, cosa que no sucede.
+
+// La solucion es que ambos hilos bloqueen los mutex en el mismo orden para evitar
+// inconvenientes.

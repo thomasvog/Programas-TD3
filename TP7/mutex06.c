@@ -101,3 +101,5 @@ pthread_t th1, th2;
 }
 
 
+// El objetivo del programa es el de producir 20 cosas y que a su vez el consumidor las
+// vaya consumiendo hasta acabar las 20.
